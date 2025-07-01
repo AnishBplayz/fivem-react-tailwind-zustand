@@ -19,11 +19,27 @@ This template leverages cutting-edge packages to ensure optimal performance, dev
 
 ### Styling & UI
 
-- **TailwindCSS 4.1.11** (Latest v4) ⚡ - Major version upgrade with:
-    - **Oxide Engine**: 10x faster CSS compilation
-    - **Native CSS Cascade Layers**: Better style organization
-    - **Improved Performance**: Significantly faster build times
-    - **Enhanced Developer Experience**: Better autocomplete and debugging
+- **TailwindCSS 3.4.17** (Latest v3) - Advanced utility-first CSS framework with:
+    - **JIT Compilation**: Just-in-time CSS generation for faster builds
+    - **Enhanced Performance**: Optimized CSS output and improved build times
+    - **Rich Ecosystem**: Comprehensive plugin support and community resources
+    - **Developer Experience**: Excellent IntelliSense and debugging tools
+
+#### UI Component Libraries
+
+- **Lucide React 0.525.0** - Beautiful, customizable icon library with 1000+ icons
+- **Class Variance Authority (CVA) 0.7.1** - Advanced utility for creating variant-based component APIs
+- **clsx 2.1.1** - Tiny utility for constructing className strings conditionally
+- **Tailwind Merge 3.3.1** - Smart utility for merging Tailwind CSS classes without conflicts
+- **TailwindCSS Animate 1.0.7** - Beautiful animations and transitions for Tailwind
+
+### Animation & Motion
+
+- **Motion 12.19.4** (Latest) - High-performance animation library with:
+    - **60fps animations** with hardware acceleration
+    - **Gesture support** for interactive UI elements
+    - **Layout animations** for smooth transitions
+    - **Optimized bundle size** for production builds
 
 ### State Management
 
@@ -33,10 +49,12 @@ This template leverages cutting-edge packages to ensure optimal performance, dev
     - Enhanced middleware system
     - Smaller bundle size
 
-### Code Quality
+### Code Quality & Formatting
 
-- **Prettier 3.6.2** (Latest) - Code formatting with organize imports plugin
-- **ESLint Ready** - Extensible linting configuration
+- **Prettier 3.6.2** (Latest) - Advanced code formatting with specialized plugins:
+    - **prettier-plugin-organize-imports 4.1.0** - Automatic import organization
+    - **prettier-plugin-packagejson 2.5.17** - JSON formatting for package.json
+    - **prettier-plugin-tailwindcss 0.6.13** - Tailwind class sorting and formatting
 - **TypeScript Strict Mode** - Enhanced type checking for better code quality
 
 ## 🎯 Why Latest Packages Matter
@@ -44,16 +62,19 @@ This template leverages cutting-edge packages to ensure optimal performance, dev
 ### Performance Benefits
 
 - **50% faster development builds** with Vite 7.0
-- **10x faster CSS compilation** with TailwindCSS v4 Oxide engine
+- **Optimized CSS compilation** with TailwindCSS JIT engine
 - **Improved runtime performance** with React 19's new concurrent features
-- **Smaller bundle sizes** with latest optimization techniques
+- **Smaller bundle sizes** with latest optimization techniques and tree-shaking
+- **Hardware-accelerated animations** with Motion library
 
 ### Developer Experience
 
 - **Enhanced TypeScript intellisense** with latest type definitions
 - **Better error messages** and debugging capabilities
 - **Improved hot reload** for faster development cycles
-- **Modern syntax support** for cleaner, more maintainable code
+- **Automatic code formatting** with comprehensive Prettier plugins
+- **Consistent icon system** with Lucide React
+- **Type-safe component variants** with CVA
 
 ### Future-Proofing
 
@@ -74,7 +95,7 @@ This template leverages cutting-edge packages to ensure optimal performance, dev
 ```bash
 # Clone the repository
 git clone <your-repo-url>
-cd fivem-react-tailwind-zustand
+cd fivem-react-ui
 
 # Install dependencies
 yarn install
@@ -95,7 +116,7 @@ yarn build
 # Build and watch for changes (for live FiveM development)
 yarn start:game
 
-# Format code with Prettier
+# Format code with Prettier (includes import organization and Tailwind sorting)
 yarn format
 
 # Preview production build
@@ -110,13 +131,81 @@ src/
 │   └── App.tsx         # Main application component
 ├── hooks/              # Custom React hooks
 │   └── useNuiEvent.ts  # FiveM NUI event handler
+├── lib/                # Shared utilities and configurations
+│   └── utils.ts        # Common utility functions (includes cn helper)
 ├── store/              # Zustand state stores
 │   └── visibility.ts   # UI visibility state
-├── utils/              # Utility functions
+├── utils/              # FiveM-specific utilities
 │   ├── debugData.ts    # Development debugging
 │   ├── fetchNui.ts     # NUI communication
 │   └── misc.ts         # Helper functions
 └── main.tsx           # Application entry point
+```
+
+## 🎨 Component Development
+
+### Using CVA for Component Variants
+
+```typescript
+import { cva } from 'class-variance-authority';
+import { cn } from '@/lib/utils';
+
+const buttonVariants = cva(
+  'inline-flex items-center justify-center rounded-md font-medium transition-colors',
+  {
+    variants: {
+      variant: {
+        default: 'bg-primary text-primary-foreground hover:bg-primary/90',
+        secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
+      },
+      size: {
+        default: 'h-10 px-4 py-2',
+        sm: 'h-9 rounded-md px-3',
+        lg: 'h-11 rounded-md px-8',
+      },
+    },
+    defaultVariants: {
+      variant: 'default',
+      size: 'default',
+    },
+  }
+);
+```
+
+### Using Icons with Lucide React
+
+```typescript
+import { ChevronRight, Settings, User } from 'lucide-react';
+
+export function Navigation() {
+  return (
+    <nav className="flex items-center space-x-4">
+      <User className="h-5 w-5" />
+      <Settings className="h-5 w-5" />
+      <ChevronRight className="h-4 w-4" />
+    </nav>
+  );
+}
+```
+
+### Animations with Motion
+
+```typescript
+import { motion } from 'motion/react';
+
+export function AnimatedCard() {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      transition={{ duration: 0.3 }}
+      className="rounded-lg bg-white p-6 shadow-lg"
+    >
+      Content here
+    </motion.div>
+  );
+}
 ```
 
 ## 🔧 FiveM Integration
@@ -157,20 +246,27 @@ const handleClose = () => {
 
 The optimized build process creates lightweight, performant bundles:
 
-- **Tree-shaking** removes unused code
+- **Tree-shaking** removes unused code including unused icons and utilities
 - **Code splitting** for optimal loading
 - **Asset optimization** for faster delivery
 - **Modern ES modules** for better browser performance
+- **CSS purging** removes unused Tailwind classes
+- **Animation optimization** for smooth 60fps performance
 
 Build output goes to `build/` directory, ready for FiveM deployment.
 
 ## 📚 Key Features
 
 - ✅ **Latest React 19** with improved performance
-- ✅ **TailwindCSS v4** with Oxide engine
+- ✅ **TailwindCSS 3.4.17** with JIT compilation
 - ✅ **TypeScript** for type safety
 - ✅ **Zustand** for efficient state management
 - ✅ **Vite** for lightning-fast development
+- ✅ **Motion** for smooth 60fps animations
+- ✅ **Lucide React** for beautiful icons
+- ✅ **CVA** for variant-based component APIs
+- ✅ **Smart class merging** with tailwind-merge and clsx
+- ✅ **Comprehensive Prettier setup** with auto-formatting
 - ✅ **FiveM NUI** integration ready
 - ✅ **Hot Module Replacement** for instant updates
 - ✅ **Production-optimized** builds
@@ -192,6 +288,19 @@ yarn install
 
 - Ensure you're using Node.js 18+
 - Check TypeScript configuration in `tsconfig.json`
+- Verify all imports are properly typed
+
+**Tailwind classes not working:**
+
+- Run `yarn format` to ensure proper class sorting
+- Check `tailwind.config.js` configuration
+- Verify classes are not being purged incorrectly
+
+**Animation performance issues:**
+
+- Ensure Motion components are properly optimized
+- Use `will-change` CSS property sparingly
+- Check for memory leaks in animation loops
 
 **NUI not loading in FiveM:**
 
