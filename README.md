@@ -1,7 +1,6 @@
 # FiveM React NUI Template
 
-A modern, high-performance FiveM NUI template built with the latest frontend technologies. This template provides a solid foundation for creating beautiful, responsive user
-interfaces for your FiveM resources.
+A modern, high-performance FiveM NUI template built with the latest frontend technologies. This template provides a solid foundation for creating beautiful, responsive user interfaces for your FiveM resources.
 
 ## 🚀 Latest Technology Stack
 
@@ -150,26 +149,23 @@ src/
 import { cva } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 
-const buttonVariants = cva(
-  'inline-flex items-center justify-center rounded-md font-medium transition-colors',
-  {
-    variants: {
-      variant: {
-        default: 'bg-primary text-primary-foreground hover:bg-primary/90',
-        secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
-      },
-      size: {
-        default: 'h-10 px-4 py-2',
-        sm: 'h-9 rounded-md px-3',
-        lg: 'h-11 rounded-md px-8',
-      },
-    },
-    defaultVariants: {
-      variant: 'default',
-      size: 'default',
-    },
-  }
-);
+const buttonVariants = cva('inline-flex items-center justify-center rounded-md font-medium transition-colors', {
+	variants: {
+		variant: {
+			default: 'bg-primary text-primary-foreground hover:bg-primary/90',
+			secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
+		},
+		size: {
+			default: 'h-10 px-4 py-2',
+			sm: 'h-9 rounded-md px-3',
+			lg: 'h-11 rounded-md px-8',
+		},
+	},
+	defaultVariants: {
+		variant: 'default',
+		size: 'default',
+	},
+});
 ```
 
 ### Using Icons with Lucide React

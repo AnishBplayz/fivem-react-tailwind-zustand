@@ -28,13 +28,7 @@ const App = () => {
 	return (
 		<AnimatePresence mode='sync'>
 			{visible && (
-				<motion.div
-					className='flex h-screen w-screen items-center justify-center bg-black/20'
-					initial={{ opacity: 0 }}
-					animate={{ opacity: 1 }}
-					exit={{ opacity: 0 }}
-					transition={{ duration: 0.5 }}
-				>
+				<motion.div className='flex h-screen w-screen items-center justify-center bg-black/20' initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.5 }}>
 					<motion.div
 						className='relative h-3/5 w-2/3 overflow-hidden rounded-lg border-2 border-gray-700/80 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 shadow-2xl'
 						initial={{ scale: 0.8, y: 50 }}
@@ -47,12 +41,7 @@ const App = () => {
 							{/* Screen Content */}
 							<div className='flex h-full flex-col items-center justify-center space-y-8 px-12 py-8'>
 								{/* Header Section */}
-								<motion.div
-									className='space-y-2 text-center'
-									initial={{ y: -20, opacity: 0 }}
-									animate={{ y: 0, opacity: 1 }}
-									transition={{ delay: 0.2, duration: 0.6 }}
-								>
+								<motion.div className='space-y-2 text-center' initial={{ y: -20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.2, duration: 0.6 }}>
 									<h1 className='text-4xl font-bold text-white'>FiveM UI</h1>
 									<p className='text-lg text-gray-400'>Start Building Your App</p>
 								</motion.div>
